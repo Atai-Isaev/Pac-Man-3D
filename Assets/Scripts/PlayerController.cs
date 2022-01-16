@@ -5,26 +5,40 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 50f;
-    public float turnSpeed = 50f;
+    public float speed = 6f;
+    private float gravity = -9.81f;
 
-    private Rigidbody playerRb;
-   
+    private CharacterController controller;
+
+    private Vector3 moveDirection;
+    private Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float forwardInput = Input.GetAxis("Vertical");
+        if (controller.isGrounded)
+        {
+            float horizontalMovement = Input.GetAxis("Horizontal");
+            float verticalMovement = Input.GetAxis("Vertical");
 
-        playerRb.AddForce(Vector3.forward * forwardInput * speed);
-        playerRb.AddForce(Vector3.right * horizontalInput * speed);
 
+            moveDirection = new Vector3(horizontalMovement, 0, verticalMovement);
+            moveDirection = moveDirection.normalized;
+            moveDirection = transform.TransformDirection(moveDirection);
+
+            controller.Move(moveDirection * Time.deltaTime * speed);
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+            // velocity = transform.TransformDirection(velocity);
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 }
