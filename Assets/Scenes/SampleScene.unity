@@ -16093,7 +16093,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070673775}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 17, y: 5.08, z: 0.549}
+  m_LocalPosition: {x: 15.39, y: 1.174, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1974616896}
@@ -16195,7 +16195,7 @@ CharacterController:
   m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1071591704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28419,6 +28419,8 @@ GameObject:
   - component: {fileID: 1974616899}
   - component: {fileID: 1974616898}
   - component: {fileID: 1974616897}
+  - component: {fileID: 1974616900}
+  - component: {fileID: 1974616901}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -28452,8 +28454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c688cfbd1450145a612a422b9772ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
-  playerBody: {fileID: 1070673776}
 --- !u!81 &1974616898
 AudioListener:
   m_ObjectHideFlags: 0
@@ -28505,6 +28505,34 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1974616900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974616895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8e180e07306d24a876f8174946ffb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 3.5
+  playerBody: {fileID: 1070673776}
+--- !u!114 &1974616901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974616895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8e180e07306d24a876f8174946ffb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 3.5
+  playerBody: {fileID: 1070673776}
 --- !u!1001 &1979284023
 PrefabInstance:
   m_ObjectHideFlags: 0
