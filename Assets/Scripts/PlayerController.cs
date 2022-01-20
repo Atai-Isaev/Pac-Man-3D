@@ -50,5 +50,11 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             ScoreManager.instance.AddPoint();
         }
+
+        if (other.gameObject.layer == 10)
+        {
+            Destroy(other.gameObject);
+            ScoreManager.instance.AddBoosterPoint();
+        }
     }
 }
