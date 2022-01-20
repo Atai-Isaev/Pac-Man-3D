@@ -19,16 +19,9 @@ public class AIController : MonoBehaviour
         _agent.SetDestination(location);
     }
     
-    void Persue()
-    {
-        Vector3 targetDir = goal.transform.position - this.transform.position;
-        float lookAhead = targetDir.magnitude / (_agent.speed + 3);
-        Seek(goal.transform.position + goal.transform.forward * lookAhead);
-    }
-
 // Update is called once per frame
     void Update()
     {
-        Persue();
+        Seek(goal.transform.position);
     }
 }
