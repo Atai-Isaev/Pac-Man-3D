@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag.Equals("Enemy"))
+        {
+            Debug.Log("'Game Over!");
+        }
         if (other.gameObject.layer == 9)
         {
             Destroy(other.gameObject);
