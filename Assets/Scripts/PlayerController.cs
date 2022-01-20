@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,15 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
             // velocity = transform.TransformDirection(velocity);
             controller.Move(velocity * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            Destroy(other.gameObject);
+            ScoreManager.instance.AddPoint();
         }
     }
 }
