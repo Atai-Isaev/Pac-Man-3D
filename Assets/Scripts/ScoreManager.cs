@@ -40,4 +40,12 @@ public class ScoreManager : MonoBehaviour
         if (highscore < score)
             PlayerPrefs.SetInt("highscore", score);
     }
+    
+    public void AddBoosterPoint()
+    {
+        score += 5;
+        scoreText.text = score.ToString() + " POINTS";
+        if (highscore < score)
+            PlayerPrefs.SetInt("highscore", score);
+    }
 }
