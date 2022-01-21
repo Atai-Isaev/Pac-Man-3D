@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 6f;
     private float gravity = -9.81f;
-
+    public Transform teleportOne;
+    public Transform teleportTwo;
     private CharacterController controller;
     public AudioClip eatSound;
     public AudioClip dieSound;
@@ -38,19 +39,28 @@ public class PlayerController : MonoBehaviour
             moveDirection = new Vector3(horizontalMovement, 0, verticalMovement);
             moveDirection = moveDirection.normalized;
             moveDirection = transform.TransformDirection(moveDirection);
-
+            Physics.SyncTransforms();
             controller.Move(moveDirection * Time.deltaTime * speed);
         }
         else
         {
             velocity.y += gravity * Time.deltaTime;
             // velocity = transform.TransformDirection(velocity);
+            Physics.SyncTransforms();
             controller.Move(velocity * Time.deltaTime);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag.Equals("Teleport_1"))
+        {
+            transform.position = teleportTwo.transform.position - new Vector3(1,0,0);
+        }
+        if (other.gameObject.tag.Equals("Teleport_2"))
+        {
+            transform.position = teleportOne.position  + new Vector3(1,0,0);
+        }
         if (other.tag.Equals("Enemy"))
         {
             Debug.Log("Game Over!");
