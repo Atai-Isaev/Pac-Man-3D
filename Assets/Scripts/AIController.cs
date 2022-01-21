@@ -18,6 +18,9 @@ public class AIController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         state = 1;
+        pointIndex = 0;
+        targetPoint = patrolingPoints[pointIndex].position;
+        _agent.SetDestination(targetPoint);
     }
 
     void Seek(Vector3 location)
@@ -42,9 +45,13 @@ public class AIController : MonoBehaviour
 
     void Patrol()
     {
-        IteratePatrolpointIndex();
-        targetPoint = patrolingPoints[pointIndex].position;
-        _agent.SetDestination(targetPoint);
+        if (Vector3.Distance(transform.position, targetPoint) < 1)
+        {
+            IteratePatrolpointIndex();
+            targetPoint = patrolingPoints[pointIndex].position;
+            _agent.SetDestination(targetPoint);
+        }
+        
     }
 
     void IteratePatrolpointIndex()
@@ -53,5 +60,6 @@ public class AIController : MonoBehaviour
         if(pointIndex == patrolingPoints.Length){
             pointIndex = 0;
         }
+        
     }
 }
