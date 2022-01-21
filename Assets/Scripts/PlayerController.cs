@@ -10,14 +10,20 @@ public class PlayerController : MonoBehaviour
     private float gravity = -9.81f;
 
     private CharacterController controller;
-
+    public AudioClip eatSound;
+    public AudioClip dieSound;
+    public AudioClip boosterSound;
+    public AudioClip introSound;
     private Vector3 moveDirection;
     private Vector3 velocity;
+    private AudioSource playerAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerAudio = GetComponent<AudioSource>();
+        playerAudio.PlayOneShot(introSound,1f);
     }
 
     // Update is called once per frame
@@ -47,18 +53,26 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag.Equals("Enemy"))
         {
-            Debug.Log("'Game Over!");
+            Debug.Log("Game Over!");
+            playerAudio.PlayOneShot(dieSound,1.0f);
         }
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.tag.Equals("Coin"))
         {
             Destroy(other.gameObject);
             ScoreManager.instance.AddPoint();
+            if (!playerAudio.isPlaying)
+            {
+                playerAudio.PlayOneShot(eatSound,0.7f);
+
+            }
+
         }
 
-        if (other.gameObject.layer == 10)
+        if (other.gameObject.tag.Equals("Booster"))
         {
             Destroy(other.gameObject);
             ScoreManager.instance.AddBoosterPoint();
+            playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }
 }

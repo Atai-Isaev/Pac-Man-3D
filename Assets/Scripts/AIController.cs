@@ -7,7 +7,7 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     public GameObject goal;
     private NavMeshAgent _agent;
-    private int state;
+    public int state = 0;
 
     public Transform[] patrolingPoints;
     private int pointIndex;
@@ -23,7 +23,6 @@ public class AIController : MonoBehaviour
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        state = 1;
         pointIndex = 0;
         targetPoint = patrolingPoints[pointIndex].position;
         _agent.SetDestination(targetPoint);
