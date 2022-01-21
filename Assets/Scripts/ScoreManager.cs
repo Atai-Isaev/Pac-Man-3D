@@ -48,4 +48,9 @@ public class ScoreManager : MonoBehaviour
         if (highscore < score)
             PlayerPrefs.SetInt("highscore", score);
     }
+
+    public int getScore()
+    {
+        return score;
+    }
 }
