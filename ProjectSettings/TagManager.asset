@@ -9,6 +9,9 @@ TagManager:
   - Booster
   - Teleport_2
   - Teleport_1
+  - life_1
+  - life_2
+  - life_3
   layers:
   - Default
   - TransparentFX

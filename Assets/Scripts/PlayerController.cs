@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float gravity = -9.81f;
     public Transform teleportOne;
     public Transform teleportTwo;
+    public Transform respawnPosition;
     private CharacterController controller;
     public AudioClip eatSound;
     public AudioClip dieSound;
@@ -18,18 +21,28 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 velocity;
     private AudioSource playerAudio;
+    public RawImage[] lifes;
+    private int initLifes;
+    public GameObject gameOverText;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOverText.SetActive(false);
         controller = GetComponent<CharacterController>();
         playerAudio = GetComponent<AudioSource>();
         playerAudio.PlayOneShot(introSound,1f);
+        initLifes = lifes.Length - 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (initLifes < 0)
+        {
+            Time.timeScale = 0;
+            gameOverText.SetActive(true);
+        }
         if (controller.isGrounded)
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
@@ -65,6 +78,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Game Over!");
             playerAudio.PlayOneShot(dieSound,1.0f);
+            transform.position = respawnPosition.position;
+            Destroy(lifes[initLifes]);
+            initLifes -= 1;
         }
         if (other.gameObject.tag.Equals("Coin"))
         {
