@@ -9,7 +9,10 @@ public class AIController : MonoBehaviour
     public GameObject goal;
     private NavMeshAgent _agent;
     private int state;
-    public Transform patrolingPoint;
+    public Transform[] patrolingPoints;
+    private int pointIndex;
+    private Vector3 targetPoint;
+
 
     void Start()
     {
@@ -39,6 +42,16 @@ public class AIController : MonoBehaviour
 
     void Patrol()
     {
-        _agent.SetDestination(patrolingPoint.position);
+        IteratePatrolpointIndex();
+        targetPoint = patrolingPoints[pointIndex].position;
+        _agent.SetDestination(targetPoint);
+    }
+
+    void IteratePatrolpointIndex()
+    {
+        pointIndex++;
+        if(pointIndex == patrolingPoints.Length){
+            pointIndex = 0;
+        }
     }
 }
