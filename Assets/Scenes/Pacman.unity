@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pacman
       objectReference: {fileID: 0}
+    - target: {fileID: 6524806501209045659, guid: a0bd1d419afbe5442acfd43d5fdf9f18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53062ce5074e5114a8d2deca38cec3f9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0bd1d419afbe5442acfd43d5fdf9f18, type: 3}
 --- !u!1 &1463835049
