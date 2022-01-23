@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -955216092348487106}
   m_Layer: 10
   m_Name: Booster
-  m_TagString: Untagged
+  m_TagString: Booster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

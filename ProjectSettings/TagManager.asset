@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Coin
+  - Booster
+  - Teleport_2
+  - Teleport_1
+  - life_1
+  - life_2
+  - life_3
   layers:
   - Default
   - TransparentFX
@@ -13,12 +21,12 @@ TagManager:
   - UI
   - 
   - 
-  - Player
+  - 
+  - 
   - Coin
-  - Booster
   - 
   - 
-  - 
+  - Door
   - 
   - 
   - 
