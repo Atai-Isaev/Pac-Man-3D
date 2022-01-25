@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOverText.SetActive(true);
-        }else if (GameObject.FindWithTag("Coin") == null && GameObject.FindWithTag("Booster") == null)
+        }else if (GameObject.Find("Coin") == null && GameObject.Find("Booster") == null)
         {
             Time.timeScale = 0;
             winText.SetActive(true);
