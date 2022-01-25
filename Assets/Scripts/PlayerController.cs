@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     public RawImage[] lifes;
     private int initLifes;
     public GameObject gameOverText;
+    public GameObject winText;
 
     // Start is called before the first frame update
     void Start()
     {
+        winText.SetActive(false);
         gameOverText.SetActive(false);
         controller = GetComponent<CharacterController>();
         playerAudio = GetComponent<AudioSource>();
@@ -42,6 +44,10 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOverText.SetActive(true);
+        }else if (GameObject.FindWithTag("Coin") == null && GameObject.FindWithTag("Booster") == null)
+        {
+            Time.timeScale = 0;
+            winText.SetActive(true);
         }
         if (controller.isGrounded)
         {
