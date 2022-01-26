@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     private int initLifes;
     public GameObject gameOverText;
     public GameObject winText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -68,8 +67,11 @@ public class PlayerController : MonoBehaviour
             Physics.SyncTransforms();
             controller.Move(velocity * Time.deltaTime);
         }
+        
+     
     }
-
+    
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Teleport_1"))

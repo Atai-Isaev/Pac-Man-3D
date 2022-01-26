@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Switch : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Switch : MonoBehaviour
             mainCam.SetActive(false);
             debugCam.SetActive(true);
         }
+      
         
     }
 
