@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag.Equals("Enemy"))
         {
-            Debug.Log("'Game Over!");
+            Debug.Log("Game Over!");
         }
         if (other.gameObject.layer == 9)
         {
