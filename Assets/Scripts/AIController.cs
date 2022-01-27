@@ -6,6 +6,10 @@ public class AIController : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject goal;
+    public GameObject ghost;
+    public GameObject defaultPrefab;
+    public GameObject scaredPrefab;
+    public Transform respawnPosition;
     private NavMeshAgent _agent;
     public int state;
 
@@ -20,6 +24,8 @@ public class AIController : MonoBehaviour
 
     private float timeLeft;
 
+    private PlayerController playerController;
+
     void Start()
     {
        StartNewGame();
@@ -29,14 +35,53 @@ public class AIController : MonoBehaviour
 		_agent = GetComponent<NavMeshAgent>();
         state = 0;
         pointIndex = 0; 
+        playerController = goal.GetComponent<PlayerController>();
         targetPoint = patrolingPoints[pointIndex].position;
         _agent.SetDestination(targetPoint);
         timeLeft = 30f;
-	}
 
+        randomPoint = new Vector3(0, 0, 0) + new Vector3(Random.Range(-mapXsize / 2, mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
+
+        state = 2;
+    }
+
+    void Seek(Vector3 location)
+    {
+        timeLeft -= Time.deltaTime;
+        
+        _agent.SetDestination(location);
+        if (timeLeft < 0)
+        {
+            state = 1;
+            timeLeft = 7f;
+        }
+    }
+
+    
 // Update is called once per frame
     void Update()
     {
+        //if(Vector3.Distance(transform.position, respawnPosition.position) < 1 && state == 2)
+        //{
+        //    scaredPrefab.SetActive(false);
+        //    defaultPrefab.SetActive(true);
+        //    state = 1;
+        //    timeLeft = 15f;
+        //}
+        if (playerController.onBooster)
+        {
+            scaredPrefab.SetActive(true);
+            defaultPrefab.SetActive(false);
+            state = 2;
+        }
+        else if (state == 2 && !playerController.onBooster)
+        {
+            scaredPrefab.SetActive(false);
+            defaultPrefab.SetActive(true);
+            state = 1;
+            timeLeft = 7f;
+        }
+
         switch (state)
         {
             case 0: // chasing
@@ -126,7 +171,7 @@ public class AIController : MonoBehaviour
 // Scare and go to random points in map
     private void Scare()
     {
-        if(Vector3.Distance(transform.position, randomPoint) < 3 || randomPoint == null)
+        if(Vector3.Distance(transform.position, randomPoint) < 4 || randomPoint == null)
         {
             randomPoint = new Vector3(0,0,0) + new Vector3(Random.Range(-mapXsize/ 2 , mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
             _agent.SetDestination(randomPoint);
