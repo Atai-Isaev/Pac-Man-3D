@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject optionMenuUI;
-   
+    
     public void StartGame()
     {
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
     
     public void QuitGame()
@@ -24,6 +28,7 @@ public class MainMenuController : MonoBehaviour
     
     public void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             Debug.Log("M PRESSED!");
@@ -40,7 +45,8 @@ public class MainMenuController : MonoBehaviour
 
                 Pause();
             }
-        }
+        }       
+
     }
 
     public void Resume()
@@ -59,10 +65,11 @@ public class MainMenuController : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
     void LoadMenu()
     {
         Debug.Log("Loading!");
 
     }
-    
+
 }

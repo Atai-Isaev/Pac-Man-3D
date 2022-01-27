@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip introSound;
     private Vector3 moveDirection;
     private Vector3 velocity;
+    public Slider volumeSlider;
     private AudioSource playerAudio;
     public RawImage[] lifes;
     private int initLifes;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerAudio.volume = volumeSlider.value;
         if (initLifes < 0)
         {
             Time.timeScale = 0;

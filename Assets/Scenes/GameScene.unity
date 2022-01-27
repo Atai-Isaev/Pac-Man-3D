@@ -2408,10 +2408,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.321
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+        m_MethodName: Update
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &98434546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14280,7 +14292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &482933491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31756,6 +31768,8 @@ GameObject:
   - component: {fileID: 1070673780}
   - component: {fileID: 1070673777}
   - component: {fileID: 1070673783}
+  - component: {fileID: 1070673779}
+  - component: {fileID: 1070673782}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -31800,6 +31814,7 @@ MonoBehaviour:
   dieSound: {fileID: 8300000, guid: df5c7b0b7ee555e4588d4e97a191ede4, type: 3}
   boosterSound: {fileID: 8300000, guid: 9064862947dc6e84892b13682f90bc23, type: 3}
   introSound: {fileID: 8300000, guid: acdad05ef27893f45ae7d0ef9030a905, type: 3}
+  volumeSlider: {fileID: 93702236}
   lifes:
   - {fileID: 985810213}
   - {fileID: 2072316194}
@@ -31847,6 +31862,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1070673779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070673775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fce2f4d20144347ac5b0a007b6bfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 0}
+  optionMenuUI: {fileID: 0}
 --- !u!54 &1070673780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31881,6 +31910,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1070673782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070673775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b428712247a1d5940a58f0695774dbcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  volumeSlider: {fileID: 0}
 --- !u!82 &1070673783
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31893,7 +31936,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.316
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -34958,7 +35001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1196426006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46924,6 +46967,7 @@ GameObject:
   - component: {fileID: 1634638082}
   - component: {fileID: 1634638081}
   - component: {fileID: 1634638085}
+  - component: {fileID: 1634638086}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -47028,6 +47072,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 579760368}
   optionMenuUI: {fileID: 807479100}
+--- !u!114 &1634638086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634638080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b428712247a1d5940a58f0695774dbcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  volumeSlider: {fileID: 0}
 --- !u!1001 &1634752858
 PrefabInstance:
   m_ObjectHideFlags: 0
