@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerAudio.volume = volumeSlider.value;
         if (initLifes < 0)
         {
             Time.timeScale = 0;

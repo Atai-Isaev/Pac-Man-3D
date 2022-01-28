@@ -32,16 +32,15 @@ public class MainMenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             Debug.Log("M PRESSED!");
-
             if (GameIsPaused)
             {               
-                Debug.Log("Game PAUSED!");
+                Debug.Log(GameIsPaused+" Game RESUMED!");
 
                 Resume();
             }
             else
             {
-                Debug.Log("Game RESUMED!");
+                Debug.Log(GameIsPaused+ "Game PAUSED!");
 
                 Pause();
             }
@@ -63,7 +62,6 @@ public class MainMenuController : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     void LoadMenu()
