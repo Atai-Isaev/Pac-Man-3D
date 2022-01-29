@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -27,5 +27,15 @@ public class CameraController : MonoBehaviour
         
         transform.localEulerAngles = Vector3.right * xRotation;
         playerBody.Rotate(Vector3.up * mouseX * mouseSensitivity);
+        if (MainMenuController.GameIsPaused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

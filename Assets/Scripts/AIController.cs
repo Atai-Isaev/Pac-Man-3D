@@ -24,8 +24,6 @@ public class AIController : MonoBehaviour
 
     private float timeLeft;
 
-    private PlayerController playerController;
-
     void Start()
     {
        StartNewGame();
@@ -41,8 +39,6 @@ public class AIController : MonoBehaviour
         timeLeft = 30f;
 
         randomPoint = new Vector3(0, 0, 0) + new Vector3(Random.Range(-mapXsize / 2, mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
-
-        state = 2;
     }
 
     void Seek(Vector3 location)

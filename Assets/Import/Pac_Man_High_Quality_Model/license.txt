@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pac Man High Quality Model
+* source:	https://sketchfab.com/3d-models/pac-man-high-quality-model-23e3f7a187b14ba287500fd75bcc3fcc
+* author:	FranciscoDugarte (https://sketchfab.com/FranciscoDugarte)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pac Man High Quality Model" (https://sketchfab.com/3d-models/pac-man-high-quality-model-23e3f7a187b14ba287500fd75bcc3fcc) by FranciscoDugarte (https://sketchfab.com/FranciscoDugarte) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

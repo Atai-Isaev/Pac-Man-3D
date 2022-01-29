@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip introSound;
     private Vector3 moveDirection;
     private Vector3 velocity;
+    public Slider volumeSlider;
     private AudioSource playerAudio;
     public RawImage[] lifes;
     private int initLifes;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     public Boolean onBooster;
     public float boosterTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -119,11 +121,9 @@ public class PlayerController : MonoBehaviour
             ScoreManager.instance.AddPoint();
             if (!playerAudio.isPlaying)
             {
-                playerAudio.PlayOneShot(eatSound, 0.7f);
+                playerAudio.PlayOneShot(eatSound,0.7f);
 
             }
-
-        }
 
         if (other.gameObject.tag.Equals("Booster"))
         {
