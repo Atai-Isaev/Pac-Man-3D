@@ -1,6 +1,8 @@
-﻿using System.Timers;
+﻿using System;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class AIController : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class AIController : MonoBehaviour
 
     private float timeLeft;
 
+    public Transform respawnPosition;
+
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -36,7 +40,7 @@ public class AIController : MonoBehaviour
     void Seek(Vector3 location)
     {
         timeLeft -= Time.deltaTime;
-        
+
         _agent.SetDestination(location);
         if (timeLeft < 0)
         {
@@ -46,12 +50,13 @@ public class AIController : MonoBehaviour
     }
 
 
-    void switchState(object source, ElapsedEventArgs e) {
+    void switchState(object source, ElapsedEventArgs e)
+    {
         if (state == 1) state = 0;
         if (state == 0) state = 1;
     }
 
-    
+
 // Update is called once per frame
     void Update()
     {
@@ -67,8 +72,8 @@ public class AIController : MonoBehaviour
                 Scare();
                 break;
         }
-       // if (ScoreManager.instance.getScore() > 70)
-         //   state = 0;
+        // if (ScoreManager.instance.getScore() > 70)
+        //   state = 0;
     }
 
     void Patrol()
@@ -80,32 +85,36 @@ public class AIController : MonoBehaviour
             targetPoint = patrolingPoints[pointIndex].position;
         }
 
-        if(timeLeft < 0)
+        if (timeLeft < 0)
         {
             state = 0;
             timeLeft = 30f;
         }
 
         _agent.SetDestination(targetPoint);
-
     }
 
     void Scare()
     {
-        if(Vector3.Distance(transform.position, randomPoint) < 3 || randomPoint == null)
+        if (Vector3.Distance(transform.position, randomPoint) < 3 || randomPoint == null)
         {
-            randomPoint = new Vector3(0,0,0) + new Vector3(Random.Range(-mapXsize/ 2 , mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
+            randomPoint = new Vector3(0, 0, 0) + new Vector3(Random.Range(-mapXsize / 2, mapXsize / 2), 0,
+                Random.Range(-mapZsize / 2, mapZsize / 2));
             _agent.SetDestination(randomPoint);
         }
-        
     }
 
     void IteratePatrolpointIndex()
     {
         pointIndex++;
-        if(pointIndex == patrolingPoints.Length){
+        if (pointIndex == patrolingPoints.Length)
+        {
             pointIndex = 0;
         }
-        
     }
+
+    // void Reset()
+    // {
+    //     transform.position = respawnPosition.position;
+    // }
 }

@@ -24,17 +24,15 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
     public RawImage[] lifes;
     private int initLifes;
-    public GameObject gameOverText;
-    public GameObject winText;
+    public MainMenuController menu;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        winText.SetActive(false);
-        gameOverText.SetActive(false);
         controller = GetComponent<CharacterController>();
         playerAudio = GetComponent<AudioSource>();
-        playerAudio.PlayOneShot(introSound,1f);
+        playerAudio.PlayOneShot(introSound, 1f);
         initLifes = lifes.Length - 1;
     }
 
@@ -43,13 +41,18 @@ public class PlayerController : MonoBehaviour
     {
         if (initLifes < 0)
         {
-            Time.timeScale = 0;
-            gameOverText.SetActive(true);
-        }else if (GameObject.Find("Coin") == null && GameObject.Find("Booster") == null)
-        {
-            Time.timeScale = 0;
-            winText.SetActive(true);
+            Time.timeScale = 0; 
+            menu.GameOverMenu();
+            MainMenuController.GameIsOver = true;
         }
+        else if (GameObject.Find("Coin") == null && GameObject.Find("Booster") == null)
+        {
+            MainMenuController.GameIsWon = true;
+            Time.timeScale = 0;
+            menu.GameOverMenu();
+            
+        }
+
         if (controller.isGrounded)
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
@@ -75,30 +78,31 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Teleport_1"))
         {
-            transform.position = teleportTwo.transform.position - new Vector3(1,0,0);
+            transform.position = teleportTwo.transform.position - new Vector3(1, 0, 0);
         }
+
         if (other.gameObject.tag.Equals("Teleport_2"))
         {
-            transform.position = teleportOne.position  + new Vector3(1,0,0);
+            transform.position = teleportOne.position + new Vector3(1, 0, 0);
         }
+
         if (other.tag.Equals("Enemy"))
         {
             Debug.Log("Game Over!");
-            playerAudio.PlayOneShot(dieSound,1.0f);
+            playerAudio.PlayOneShot(dieSound, 1.0f);
             transform.position = respawnPosition.position;
             Destroy(lifes[initLifes]);
             initLifes -= 1;
         }
+
         if (other.gameObject.tag.Equals("Coin"))
         {
             Destroy(other.gameObject);
             ScoreManager.instance.AddPoint();
             if (!playerAudio.isPlaying)
             {
-                playerAudio.PlayOneShot(eatSound,0.7f);
-
+                playerAudio.PlayOneShot(eatSound, 0.7f);
             }
-
         }
 
         if (other.gameObject.tag.Equals("Booster"))
@@ -108,4 +112,15 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }
+
+    // public void Reset()
+    // {
+    //     for (int i = 0; i < 3; i++)
+    //     {
+    //         lifes[i] = GameObject.Instantiate(lifes[i]);
+    //     }
+    //     ScoreManager.instance.Reset();
+    //     initLifes = lifes.Length - 1;
+    //     transform.position = respawnPosition.position;
+    // }
 }

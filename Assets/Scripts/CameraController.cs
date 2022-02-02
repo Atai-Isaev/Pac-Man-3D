@@ -27,7 +27,12 @@ public class CameraController : MonoBehaviour
         
         transform.localEulerAngles = Vector3.right * xRotation;
         playerBody.Rotate(Vector3.up * mouseX * mouseSensitivity);
-        if (MainMenuController.GameIsPaused)
+        if (MainMenuController.GameIsOver)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (MainMenuController.GameIsPaused)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

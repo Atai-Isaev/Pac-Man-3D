@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,4 +54,9 @@ public class ScoreManager : MonoBehaviour
     {
         return score;
     }
+    //
+    // public void Reset()
+    // {
+    //     this.score = 0;
+    // }
 }
