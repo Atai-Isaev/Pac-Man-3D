@@ -34,10 +34,20 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerAudio.PlayOneShot(introSound, 1f);
         initLifes = lifes.Length - 1;
-        Time.timeScale = 1;
-        MainMenuController.GameIsOver = false;
-        MainMenuController.GameIsPaused = false;
-        MainMenuController.GameIsWon = false;
+
+        if (MainMenuController.FirstStart)
+        {
+            menu.StartGameMenu();
+        }
+        else
+        {
+            Time.timeScale = 1;
+               
+            MainMenuController.GameIsOver = false;
+            MainMenuController.GameIsPaused = false;
+            MainMenuController.GameIsWon = false;
+        }
+     
     }
 
     // Update is called once per frame
