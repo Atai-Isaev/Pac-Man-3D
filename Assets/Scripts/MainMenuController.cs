@@ -59,10 +59,12 @@ public class MainMenuController : MonoBehaviour
         if (GameIsOver)
         {
             gameOverText.SetActive(true);
+            gameWinText.SetActive(false);
         }
         else if(GameIsWon)
         {
             gameWinText.SetActive(true);
+            gameOverText.SetActive(false);
         }
         pauseMenuUI.SetActive(true);
         restartMenuUI.SetActive(true);

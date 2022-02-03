@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
         playerAudio.PlayOneShot(introSound, 1f);
         initLifes = lifes.Length - 1;
         Time.timeScale = 1;
+        MainMenuController.GameIsOver = false;
+        MainMenuController.GameIsPaused = false;
+        MainMenuController.GameIsWon = false;
     }
 
     // Update is called once per frame
