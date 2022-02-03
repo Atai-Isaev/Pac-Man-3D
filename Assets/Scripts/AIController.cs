@@ -112,9 +112,5 @@ public class AIController : MonoBehaviour
             pointIndex = 0;
         }
     }
-
-    // void Reset()
-    // {
-    //     transform.position = respawnPosition.position;
-    // }
+    
 }

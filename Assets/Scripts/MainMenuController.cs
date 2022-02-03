@@ -73,7 +73,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Reset()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Resume()
@@ -84,7 +84,7 @@ public class MainMenuController : MonoBehaviour
         GameIsPaused = false;
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;

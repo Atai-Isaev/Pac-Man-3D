@@ -20,13 +20,13 @@ public class CameraController : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-
-       
+        
         xRotation -= mouseY * mouseSensitivity;
         xRotation = Mathf.Clamp(xRotation, -90, 90);
         
         transform.localEulerAngles = Vector3.right * xRotation;
         playerBody.Rotate(Vector3.up * mouseX * mouseSensitivity);
+        
         if (MainMenuController.GameIsOver)
         {
             Cursor.lockState = CursorLockMode.None;

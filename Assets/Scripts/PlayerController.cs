@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerAudio.PlayOneShot(introSound, 1f);
         initLifes = lifes.Length - 1;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -57,10 +58,8 @@ public class PlayerController : MonoBehaviour
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
             float verticalMovement = Input.GetAxis("Vertical");
-
-
+            
             moveDirection = new Vector3(horizontalMovement, 0, verticalMovement);
-            moveDirection = moveDirection.normalized;
             moveDirection = transform.TransformDirection(moveDirection);
             Physics.SyncTransforms();
             controller.Move(moveDirection * Time.deltaTime * speed);
@@ -112,15 +111,5 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }
-
-    // public void Reset()
-    // {
-    //     for (int i = 0; i < 3; i++)
-    //     {
-    //         lifes[i] = GameObject.Instantiate(lifes[i]);
-    //     }
-    //     ScoreManager.instance.Reset();
-    //     initLifes = lifes.Length - 1;
-    //     transform.position = respawnPosition.position;
-    // }
+    
 }
