@@ -57,7 +57,8 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOverText.SetActive(true);
-        } else if (GameObject.Find("Coin") == null && GameObject.Find("Booster") == null)
+        } 
+		else if (GameObject.Find("Coin") == null && GameObject.Find("Booster") == null)
         {
             Time.timeScale = 0;
             winText.SetActive(true);
@@ -66,7 +67,6 @@ public class PlayerController : MonoBehaviour
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
             float verticalMovement = Input.GetAxis("Vertical");
-
 
             moveDirection = new Vector3(horizontalMovement, 0, verticalMovement);
             moveDirection = moveDirection.normalized;
@@ -82,10 +82,10 @@ public class PlayerController : MonoBehaviour
             controller.Move(velocity * Time.deltaTime);
         }
 
-        if (onBooster)
+       if (onBooster)
         {
             triggerOnBooster();
-        }
+      	 }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             if (onBooster) {
                 // other.gameObject.transform.position = ghostRespawn.position;
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
                 ScoreManager.instance.AddGhostPoint();
             }
             else
@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag.Equals("Coin"))
         {
+			Debug.Log("Coin");
             Destroy(other.gameObject);
             ScoreManager.instance.AddPoint();
             if (!playerAudio.isPlaying)
@@ -124,9 +125,10 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(eatSound,0.7f);
 
             }
-
+		}
         if (other.gameObject.tag.Equals("Booster"))
         {
+			Debug.Log("Booster");
             onBooster = true;
             boosterTime = 7f;
             Destroy(other.gameObject);
@@ -134,8 +136,7 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }
-
-    public void triggerOnBooster()
+	private void triggerOnBooster()
     {
         boosterTime -= Time.deltaTime;
         if(boosterTime < 0)

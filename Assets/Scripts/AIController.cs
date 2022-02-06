@@ -9,75 +9,53 @@ public class AIController : MonoBehaviour
     public GameObject ghost;
     public GameObject defaultPrefab;
     public GameObject scaredPrefab;
-    public Transform respawnPosition;
-    private NavMeshAgent _agent;
+    public GameObject deadPrefab;
+    protected NavMeshAgent _agent;
     public int state;
 
     public Transform[] patrolingPoints;
     public Transform[] homePoints;
-    private int pointIndex;
-    private Vector3 targetPoint;
+    protected int pointIndex;
+    protected Vector3 targetPoint;
 
     private Vector3 randomPoint;
     private static int mapZsize = 30;
     private static int mapXsize = 17;
 
-    private float timeLeft;
+	private PlayerController playerController;
+
+    protected float patrolTimeLeft;
+    protected float scareTimeLeft;
 
     void Start()
     {
-       StartNewGame();
-    }
-
-	private void StartNewGame(){
 		_agent = GetComponent<NavMeshAgent>();
-        state = 0;
-        pointIndex = 0; 
         playerController = goal.GetComponent<PlayerController>();
-        targetPoint = patrolingPoints[pointIndex].position;
-        _agent.SetDestination(targetPoint);
-        timeLeft = 30f;
-
-        randomPoint = new Vector3(0, 0, 0) + new Vector3(Random.Range(-mapXsize / 2, mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
+      	StartNewGame();
     }
 
-    void Seek(Vector3 location)
-    {
-        timeLeft -= Time.deltaTime;
-        
-        _agent.SetDestination(location);
-        if (timeLeft < 0)
-        {
-            state = 1;
-            timeLeft = 7f;
-        }
+	public virtual void StartNewGame()
+	{
+        state = 3;
+        pointIndex = 0; 
+		patrolTimeLeft = 30f;
+		scareTimeLeft = 7f;
+        targetPoint = homePoints[0].position;
+        _agent.Warp(targetPoint);
     }
 
     
 // Update is called once per frame
     void Update()
     {
-        //if(Vector3.Distance(transform.position, respawnPosition.position) < 1 && state == 2)
-        //{
-        //    scaredPrefab.SetActive(false);
-        //    defaultPrefab.SetActive(true);
-        //    state = 1;
-        //    timeLeft = 15f;
-        //}
-        if (playerController.onBooster)
-        {
-            scaredPrefab.SetActive(true);
+        if (playerController.onBooster && state != 4)
+        {	
             defaultPrefab.SetActive(false);
+            scaredPrefab.SetActive(true);
+			scareTimeLeft = 7f;
+			randomPoint = new Vector3(0, 0, 0) + new Vector3(Random.Range(-mapXsize / 2, mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
             state = 2;
         }
-        else if (state == 2 && !playerController.onBooster)
-        {
-            scaredPrefab.SetActive(false);
-            defaultPrefab.SetActive(true);
-            state = 1;
-            timeLeft = 7f;
-        }
-
         switch (state)
         {
             case 0: // chasing
@@ -89,12 +67,13 @@ public class AIController : MonoBehaviour
             case 2: // scare
                 Scare();
                 break;
-			case 3: // scare
+			case 3: // in home
                 WalkInHome();
                 break;
+			case 4: // dead
+                Dead();
+                break;
         }
-       // if (ScoreManager.instance.getScore() > 70)
-         //   state = 0;
     }
 
 	private void OnTriggerEnter(Collider other)
@@ -102,26 +81,26 @@ public class AIController : MonoBehaviour
 		//If trigger with pacman, warp ghost to start point
         if (other.tag.Equals("Player"))
         {
-            Debug.Log("Game Over!");
-			state = 2;
-			_agent.Warp(new Vector3(0,0.51F,0));
-        	//randomPoint = new Vector3(0,0,0) + new Vector3(Random.Range(-mapXsize/ 2 , mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
-            //_agent.SetDestination(randomPoint);
+			if (playerController.onBooster)
+        	{
+				scaredPrefab.SetActive(false);
+				deadPrefab.SetActive(true);
+				_agent.SetDestination(homePoints[0].position);
+            	state = 4;
+        	}
+			else
+			{
+				state = 3;
+				_agent.Warp(homePoints[0].position);			
+			}
         }
     }
 
-// Chase to specific points
-    private void Seek()
+	// Chase to specific points
+    public virtual void Seek()
     {
 		Vector3 location = goal.transform.position;
-        timeLeft -= Time.deltaTime;
-        
         _agent.SetDestination(location);
-        if (timeLeft < 0)
-        {
-            state = 1;
-            timeLeft = 15f;
-        }
     }
 
     private void switchState(object source, ElapsedEventArgs e) 
@@ -130,19 +109,34 @@ public class AIController : MonoBehaviour
         if (state == 0) state = 1;
     }
 
-	private void WalkInHome(){
+	public virtual void WalkInHome()
+	{
+		if(homePoints.Length == 1)
+		{
+			state = 1;
+			return;
+		}
+		if(ScoreManager.instance.getScore() > 30)
+		{
+			state = 1;
+		}
 		IterateBetweenPoints(homePoints);
 	}
 
 
-// Patrolling between specific points
+	// Patrolling between specific points
     private void Patrol()
     {
-        IterateBetweenPoints(patrolingPoints);
-		CheckTime();
+		patrolTimeLeft -= Time.deltaTime;
+        if(patrolTimeLeft < 0)
+        {
+            state = 0;
+        }
+		IterateBetweenPoints(patrolingPoints);
     }
 
-	private void IterateBetweenPoints(Transform[] points){
+	protected void IterateBetweenPoints(Transform[] points)
+	{
 		if (Vector3.Distance(transform.position, targetPoint) < 1)
         {
             pointIndex++;
@@ -151,26 +145,45 @@ public class AIController : MonoBehaviour
             	pointIndex = 0;
         	}
             targetPoint = points[pointIndex].position;
-        }
-		_agent.SetDestination(targetPoint);
-	}
-
-	private void CheckTime(){
-		timeLeft -= Time.deltaTime;
-        if(timeLeft < 0)
-        {
-            state = 0;
-            timeLeft = 30f;
+			_agent.SetDestination(targetPoint);
         }
 	}
 
-// Scare and go to random points in map
+	// Scare and go to random points in map
     private void Scare()
     {
+		scareTimeLeft -= Time.deltaTime;
+        if(scareTimeLeft < 0)
+        {
+			if(patrolTimeLeft < 0)
+			{
+				state = 0;
+			}
+			else
+			{
+            	state = 1;			
+			}
+			scaredPrefab.SetActive(false);
+            defaultPrefab.SetActive(true);
+			scareTimeLeft = 7f;
+        }
+
         if(Vector3.Distance(transform.position, randomPoint) < 4 || randomPoint == null)
         {
             randomPoint = new Vector3(0,0,0) + new Vector3(Random.Range(-mapXsize/ 2 , mapXsize / 2), 0, Random.Range(-mapZsize / 2, mapZsize / 2));
             _agent.SetDestination(randomPoint);
         }
     }
+
+	public void Dead()
+	{
+		if (Vector3.Distance(transform.position, homePoints[0].position) < 1)
+        {
+            defaultPrefab.SetActive(true);
+			deadPrefab.SetActive(false);
+			state = 3;
+        }
+	}
+	
+	
 }
