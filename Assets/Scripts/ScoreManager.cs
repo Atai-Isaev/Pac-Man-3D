@@ -45,6 +45,13 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("highscore", score);
     }
 
+    public void AddCherryPoint()
+    {
+        score += 20;
+        scoreText.text = score.ToString() + " POINTS";
+        if (highscore < score)
+            PlayerPrefs.SetInt("highscore", score);
+    }
     public int getScore()
     {
         return score;
