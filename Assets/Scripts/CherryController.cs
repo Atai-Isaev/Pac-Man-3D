@@ -26,7 +26,8 @@ public class CherryController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (ScoreManager.instance.getScore()==10)
+        Debug.Log("Score: "+ScoreManager.instance.getScore());
+         if (ScoreManager.instance.getScore()==10||ScoreManager.instance.getScore()==100)
          {
              Invoke("Show",1f);
          }
