@@ -27,7 +27,7 @@ public class CherryController : MonoBehaviour
     void Update()
     {
         Debug.Log("Score: "+ScoreManager.instance.getScore());
-         if (ScoreManager.instance.getScore()==10||ScoreManager.instance.getScore()==100)
+         if (ScoreManager.instance.getScore()==10||ScoreManager.instance.getScore()==100||ScoreManager.instance.getScore()==300)
          {
              Invoke("Show",1f);
          }

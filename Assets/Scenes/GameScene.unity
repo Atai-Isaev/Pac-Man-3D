@@ -18544,7 +18544,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
   m_PrefabInstance: {fileID: 1072329835}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &394871032
+--- !u!135 &394871031
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18553,10 +18553,10 @@ SphereCollider:
   m_GameObject: {fileID: 394871030}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Center: {x: 0, y: 2, z: 1}
 --- !u!1001 &396077973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29439,7 +29439,7 @@ SphereCollider:
   m_GameObject: {fileID: 626653307}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 1, z: 0.5}
@@ -41392,7 +41392,7 @@ GameObject:
   - component: {fileID: 900807736}
   m_Layer: 0
   m_Name: Cherry
-  m_TagString: Cherry
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49235,9 +49235,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base2
       objectReference: {fileID: 0}
+    - target: {fileID: -3215555783603854218, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2932998491564163895, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_Name
       value: Pith2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932998491564163895, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1018664272722485354, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_Name
@@ -49246,6 +49254,10 @@ PrefabInstance:
     - target: {fileID: -1018664272722485354, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_TagString
       value: Cherry
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_Name
@@ -49259,9 +49271,17 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cherry
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4424396828587804706, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_Name
       value: Pith1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424396828587804706, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6317578925029434746, guid: 4b5ec81ef888ef345a78a7bf60dd0b4e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -52818,6 +52838,10 @@ PrefabInstance:
     - target: {fileID: 7900672042803546498, guid: 3d924f85d6ae87147bd867a16cefb368, type: 3}
       propertyPath: m_TagString
       value: Cherry
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900672042803546498, guid: 3d924f85d6ae87147bd867a16cefb368, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d924f85d6ae87147bd867a16cefb368, type: 3}

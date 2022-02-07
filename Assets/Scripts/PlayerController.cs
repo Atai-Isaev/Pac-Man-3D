@@ -121,10 +121,10 @@ public class PlayerController : MonoBehaviour
         
         if (other.gameObject.tag.Equals("Cherry"))
         { 
-            ScoreManager.instance.AddCherryPoint();
-            //Destroy(other.gameObject);
+            
             other.gameObject.SetActive(false);
-           
+            ScoreManager.instance.AddCherryPoint();
+
             playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }
