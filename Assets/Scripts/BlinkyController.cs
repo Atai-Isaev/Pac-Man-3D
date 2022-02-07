@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class BlinkyController : AIController
 {
-    public override void Seek()
-    {
-        Vector3 location = goal.transform.position;
-        _agent.SetDestination(location);
-    }
+    //public override void Seek()
+    //{
+    //    chaseTimeLeft -= Time.deltaTime;
+    //    if (chaseTimeLeft < 0)
+    //    {
+    //        state = 1;
+    //        patrolTimeLeft = 30f;
+
+    //    }
+    //    Vector3 location = goal.transform.position;
+    //    _agent.SetDestination(location);
+    //}
 }

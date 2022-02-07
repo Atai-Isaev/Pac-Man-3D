@@ -7,6 +7,12 @@ public class PinkyController : AIController
     private float walkInHomeTimeLeft = 7f;
     public override void Seek()
     {
+        chaseTimeLeft -= Time.deltaTime;
+        if (chaseTimeLeft < 0)
+        {
+            state = 1;
+            patrolTimeLeft = 7f;
+        }
         Vector3 location = goal.transform.position;
         _agent.SetDestination(location);
     }
