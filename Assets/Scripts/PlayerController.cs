@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -131,6 +126,15 @@ public class PlayerController : MonoBehaviour
             _ = BoosterManager.instance.StartBoosterModeAsync();
             Destroy(other.gameObject);
             ScoreManager.instance.AddBoosterPoint();
+            playerAudio.PlayOneShot(boosterSound, 0.8f);
+        }
+        
+        if (other.gameObject.tag.Equals("Cherry"))
+        { 
+            
+            other.gameObject.SetActive(false);
+            ScoreManager.instance.AddCherryPoint();
+
             playerAudio.PlayOneShot(boosterSound, 0.8f);
         }
     }

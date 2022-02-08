@@ -12,6 +12,7 @@ TagManager:
   - life_1
   - life_2
   - life_3
+  - Cherry
   layers:
   - Default
   - TransparentFX
