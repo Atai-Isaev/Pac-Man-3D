@@ -4,24 +4,40 @@ using UnityEngine;
 
 public class GlydeController : GhostController
 {
- //   public override void Seek()
- //   {
- //       chaseTimeLeft -= Time.deltaTime;
- //       if (chaseTimeLeft < 0)
- //       {
- //           state = 1;
- //           patrolTimeLeft = 7f;
- //       }
- //       Vector3 location = goal.transform.position;
- //       _agent.SetDestination(location);
- //   }
+    private bool inRange;
 
-	//public override void WalkInHome()
- //   {
- //       if(ScoreManager.instance.getScore() > 280)
-	//	{
-	//		state = 1;
-	//	}
- //       IterateBetweenPoints(homePoints);
- //   }
+    protected override void Seek()
+    {
+        if (Vector3.Distance(transform.position, goal.transform.position) > 8)
+        {
+            inRange = false;
+            Vector3 location = goal.transform.position;
+            _agent.SetDestination(location);
+        }
+        else
+        {
+            if (!inRange)
+            {
+                pointIndex = 0;
+                targetPoint = patrolingPoints[pointIndex].position;
+                _agent.SetDestination(targetPoint);
+                inRange = true;
+            }
+            
+        }
+
+        timer -= Time.deltaTime;
+        if(timer < 0)
+        {
+            StartPatrolMode();
+        }
+    }
+
+    protected override void Activate()
+    {
+       if(ScoreManager.instance.GetCoinsEaten() >= 60) {
+            isActivated = true;
+            StartPatrolMode();
+       }
+    }
 }

@@ -10,6 +10,7 @@ public class PinkyController : GhostController
     protected override void SetUpGhost()
     {
         timer = 7f;
+        defaultSpeed = 3;
     }
 
     protected override void Activate() {

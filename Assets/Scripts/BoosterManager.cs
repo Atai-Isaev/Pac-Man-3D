@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BoosterManager : MonoBehaviour
 {
-    public GameObject player;
     public GameObject[] ghosts;
     public static BoosterManager instance;
 

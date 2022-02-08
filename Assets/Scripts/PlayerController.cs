@@ -87,16 +87,17 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag.Equals("Enemy"))
         {
-            GhostController ghostContorller = other.GetComponent<GhostController>();
-            if (ghostContorller.IsScared()) {
-                ghostContorller.StartDeadMode();
+            GhostController ghostContoroller = other.GetComponent<GhostController>();
+            if (ghostContoroller.IsScared()) {
+                ghostContoroller.StartDeadMode();
                 ScoreManager.instance.AddGhostPoint();
             }
-            else if(!ghostContorller.IsDead())
+            else if(!ghostContoroller.IsDead())
             {
                 Debug.Log("Game Over!");
                 playerAudio.PlayOneShot(dieSound, 1.0f);
                 transform.position = respawnPosition.position;
+                ResetManager.instance.Reset();
                 Destroy(lifes[initLifes]);
                 initLifes -= 1;
             }

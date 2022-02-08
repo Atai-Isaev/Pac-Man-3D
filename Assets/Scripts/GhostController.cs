@@ -14,7 +14,10 @@ public class GhostController : MonoBehaviour
     public int state;
 
     public Transform[] patrolingPoints;
-    public Transform[] homePoints;
+    public Transform homePoint;
+
+    public Transform teleportOne;
+    public Transform teleportTwo;
 
     public int pointIndex;
     public Vector3 targetPoint;
@@ -30,6 +33,9 @@ public class GhostController : MonoBehaviour
     private static float patrolDuration = 7f;
     private static float chaseDuration = 15f;
 
+    protected int defaultSpeed = 2;
+    protected static int deadSpeed = 5;
+
     public float timer;
 
     void Start()
@@ -38,6 +44,7 @@ public class GhostController : MonoBehaviour
         isDead = false;
         isActivated = false;
         _agent = GetComponent<NavMeshAgent>();
+        _agent.speed = defaultSpeed;
         state = -1;
         SetUpGhost();
     }
@@ -108,7 +115,7 @@ public class GhostController : MonoBehaviour
     }
 
     private void Dead() {
-        if(Vector3.Distance(transform.position, homePoints[0].position) < 1) {
+        if(Vector3.Distance(transform.position, homePoint.position) < 1) {
             StartPatrolMode();
         }
     }
@@ -133,7 +140,7 @@ public class GhostController : MonoBehaviour
         state = 1;
         defaultPrefab.SetActive(true);
         pointIndex = 0;
-        targetPoint = patrolingPoints[0].position;
+        targetPoint = patrolingPoints[pointIndex].position;
         _agent.SetDestination(targetPoint);
     }
 
@@ -153,8 +160,8 @@ public class GhostController : MonoBehaviour
         EndCurrentMode();
         deadPrefab.SetActive(true);
         isDead = true;
-        _agent.SetDestination(homePoints[0].position);
-        _agent.speed = 5;
+        _agent.SetDestination(homePoint.position);
+        _agent.speed = deadSpeed;
         state = 3;
     }
 
@@ -162,7 +169,7 @@ public class GhostController : MonoBehaviour
     {
         deadPrefab.SetActive(false);
         isDead = false;
-        _agent.speed = 2;
+        _agent.speed = defaultSpeed;
     }
 
     public void EndScaredMode()
@@ -194,6 +201,24 @@ public class GhostController : MonoBehaviour
                 EndDeadMode();
                 break;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Teleport_1"))
+        {
+            _agent.Warp(teleportTwo.transform.position - new Vector3(1, 0, 0));
+        }
+        if (other.gameObject.tag.Equals("Teleport_2"))
+        {
+            _agent.Warp(teleportOne.position + new Vector3(1, 0, 0));
+        }
+    }
+
+    public void Reset()
+    {
+        _agent.Warp(homePoint.position);
+        StartPatrolMode();
     }
 
     public bool IsScared()

@@ -11,7 +11,7 @@ public class InkyController : GhostController
         Quaternion direction = goal.transform.rotation;
         Vector3 targetPosition = goal.transform.position + direction * Vector3.forward * 2f;
 
-        targetPosition = (targetPosition - blinky.transform.position) * 2;
+        targetPosition = blinky.transform.position + (targetPosition - blinky.transform.position) * 2;
 
         _agent.SetDestination(targetPosition);
     }
