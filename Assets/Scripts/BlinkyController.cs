@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlinkyController : AIController
+public class BlinkyController : GhostController
 {
-    //public override void Seek()
-    //{
-    //    chaseTimeLeft -= Time.deltaTime;
-    //    if (chaseTimeLeft < 0)
-    //    {
-    //        state = 1;
-    //        patrolTimeLeft = 30f;
+    protected override void Seek()
+    {
+        Vector3 location = goal.transform.position;
+        _agent.SetDestination(location);
 
-    //    }
-    //    Vector3 location = goal.transform.position;
-    //    _agent.SetDestination(location);
-    //}
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            StartPatrolMode();
+        }
+    }
+
+    protected override void Activate()
+    {
+        isActivated = true;
+        StartPatrolMode();
+    }
 }

@@ -29,25 +29,17 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOverText;
     public GameObject winText;
 
-    public Boolean onBooster;
-    public float boosterTime;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        onBooster = false;
         winText.SetActive(false);
         gameOverText.SetActive(false);
         controller = GetComponent<CharacterController>();
         playerAudio = GetComponent<AudioSource>();
         playerAudio.PlayOneShot(introSound, 1f);
         initLifes = lifes.Length - 1;
-    }
-
-    Boolean onBoosterStatus()
-    {
-        return onBooster;
     }
 
     // Update is called once per frame
@@ -81,11 +73,6 @@ public class PlayerController : MonoBehaviour
             Physics.SyncTransforms();
             controller.Move(velocity * Time.deltaTime);
         }
-
-       if (onBooster)
-        {
-            triggerOnBooster();
-      	 }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,12 +87,12 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag.Equals("Enemy"))
         {
-            if (onBooster) {
-                // other.gameObject.transform.position = ghostRespawn.position;
-                //Destroy(other.gameObject);
+            GhostController ghostContorller = other.GetComponent<GhostController>();
+            if (ghostContorller.IsScared()) {
+                ghostContorller.StartDeadMode();
                 ScoreManager.instance.AddGhostPoint();
             }
-            else
+            else if(!ghostContorller.IsDead())
             {
                 Debug.Log("Game Over!");
                 playerAudio.PlayOneShot(dieSound, 1.0f);
@@ -129,19 +116,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag.Equals("Booster"))
         {
 			Debug.Log("Booster");
-            onBooster = true;
-            boosterTime = 7f;
+            _ = BoosterManager.instance.StartBoosterModeAsync();
             Destroy(other.gameObject);
             ScoreManager.instance.AddBoosterPoint();
             playerAudio.PlayOneShot(boosterSound, 0.8f);
-        }
-    }
-	private void triggerOnBooster()
-    {
-        boosterTime -= Time.deltaTime;
-        if(boosterTime < 0)
-        {
-            onBooster = false;
         }
     }
 }

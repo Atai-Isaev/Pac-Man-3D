@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InkyController : AIController
+public class InkyController : GhostController
 {
-    public override void Seek()
+    public GameObject blinky;
+
+    protected override void Seek()
     {
-        chaseTimeLeft -= Time.deltaTime;
-        if (chaseTimeLeft < 0)
-        {
-            state = 1;
-            patrolTimeLeft = 7f;
-        }
-        Vector3 location = goal.transform.position;
-        _agent.SetDestination(location);
+        Quaternion direction = goal.transform.rotation;
+        Vector3 targetPosition = goal.transform.position + direction * Vector3.forward * 2f;
+
+        targetPosition = (targetPosition - blinky.transform.position) * 2;
+
+        _agent.SetDestination(targetPosition);
     }
+
+    protected override void Activate() {
+        if(ScoreManager.instance.GetCoinsEaten() > 30) {
+            isActivated = true;
+            StartPatrolMode();
+        }
+    }
+
 }

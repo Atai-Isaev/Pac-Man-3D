@@ -1,40 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PinkyController : AIController
+public class PinkyController : GhostController
 {
-    private float walkInHomeTimeLeft = 7f;
-    public override void Seek()
+    public String playerDirection;
+
+    protected override void SetUpGhost()
     {
-        chaseTimeLeft -= Time.deltaTime;
-        if (chaseTimeLeft < 0)
+        timer = 7f;
+    }
+
+    protected override void Activate() {
+        timer -= Time.deltaTime;
+        if(timer < 0)
         {
-            state = 1;
-            patrolTimeLeft = 7f;
+            isActivated = true;
+            StartPatrolMode();
         }
-        Vector3 location = goal.transform.position;
-        _agent.SetDestination(location);
     }
-    
-    public override void WalkInHome()
+
+    protected override void Seek()
     {
-        walkInHomeTimeLeft -= Time.deltaTime;
-        if(walkInHomeTimeLeft < 0)
-        {
-            state = 1;
+        Quaternion direction = goal.transform.rotation;
+        Vector3 targetPosition = goal.transform.position + direction * Vector3.forward * 4f;
+        _agent.SetDestination(targetPosition);
+
+
+        timer -= Time.deltaTime;
+        if(timer < 0) {
+            StartPatrolMode();
         }
-        IterateBetweenPoints(homePoints);
     }
-    
-    public override void StartNewGame()
-    {
-        state = 3;
-        pointIndex = 0; 
-        patrolTimeLeft = 30f;
-        scareTimeLeft = 7f;
-        walkInHomeTimeLeft = 7f;
-        targetPoint = homePoints[0].position;
-        _agent.Warp(targetPoint);
-    }
+
 }
