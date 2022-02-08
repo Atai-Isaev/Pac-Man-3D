@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             velocity.y += gravity * Time.deltaTime;
-            // velocity = transform.TransformDirection(velocity);
             Physics.SyncTransforms();
             controller.Move(velocity * Time.deltaTime);
         }
@@ -101,10 +100,10 @@ public class PlayerController : MonoBehaviour
             {
                 //Debug.Log("Game Over!");
                 playerAudio.PlayOneShot(dieSound, 1.0f);
-                //transform.position = respawnPosition.position;
-                //ResetManager.instance.Reset();
-                //Destroy(lifes[initLifes]);
-                //initLifes -= 1;
+                transform.position = respawnPosition.position;
+                ResetManager.instance.Reset();
+                Destroy(lifes[initLifes]);
+                initLifes -= 1;
             }
             
         }

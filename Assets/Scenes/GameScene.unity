@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073987, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -49800,7 +49800,7 @@ MonoBehaviour:
   dieSound: {fileID: 8300000, guid: df5c7b0b7ee555e4588d4e97a191ede4, type: 3}
   boosterSound: {fileID: 8300000, guid: 9064862947dc6e84892b13682f90bc23, type: 3}
   introSound: {fileID: 8300000, guid: acdad05ef27893f45ae7d0ef9030a905, type: 3}
-  volumeSlider: {fileID: 0}
+  volumeSlider: {fileID: 93702236}
   lifes:
   - {fileID: 985810213}
   - {fileID: 2072316194}

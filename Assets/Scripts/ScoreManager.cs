@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +29,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPoint()
     {
-        score += 1;
+        score += 10;
         coinEaten++;
         scoreText.text = score.ToString() + " POINTS";
         if (highscore < score)
@@ -42,7 +38,7 @@ public class ScoreManager : MonoBehaviour
     
     public void AddBoosterPoint()
     {
-        score += 5;
+        score += 100;
         scoreText.text = score.ToString() + " POINTS";
         if (highscore < score)
             PlayerPrefs.SetInt("highscore", score);
@@ -50,7 +46,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddCherryPoint()
     {
-        score += 20;
+        score += 100;
         scoreText.text = score.ToString() + " POINTS";
         if (highscore < score)
             PlayerPrefs.SetInt("highscore", score);
