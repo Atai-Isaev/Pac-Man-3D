@@ -56,6 +56,9 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("highscore", score);
     }
     public int getScore()
+	{
+		return score;
+	}
     public void AddGhostPoint()
     {
         score += 200;
