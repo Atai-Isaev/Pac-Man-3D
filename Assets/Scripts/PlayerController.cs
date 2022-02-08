@@ -94,18 +94,18 @@ public class PlayerController : MonoBehaviour
             }
             else if(!ghostContoroller.IsDead())
             {
-                Debug.Log("Game Over!");
+                //Debug.Log("Game Over!");
                 playerAudio.PlayOneShot(dieSound, 1.0f);
-                transform.position = respawnPosition.position;
-                ResetManager.instance.Reset();
-                Destroy(lifes[initLifes]);
-                initLifes -= 1;
+                //transform.position = respawnPosition.position;
+                //ResetManager.instance.Reset();
+                //Destroy(lifes[initLifes]);
+                //initLifes -= 1;
             }
             
         }
         if (other.gameObject.tag.Equals("Coin"))
         {
-			Debug.Log("Coin");
+			//Debug.Log("Coin");
             Destroy(other.gameObject);
             ScoreManager.instance.AddPoint();
             if (!playerAudio.isPlaying)
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 		}
         if (other.gameObject.tag.Equals("Booster"))
         {
-			Debug.Log("Booster");
+			//Debug.Log("Booster");
             _ = BoosterManager.instance.StartBoosterModeAsync();
             Destroy(other.gameObject);
             ScoreManager.instance.AddBoosterPoint();

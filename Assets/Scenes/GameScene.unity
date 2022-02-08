@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073987, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0103e941566006f43ba97553b7ad424c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e29fd9a5adbfe93c4adc6f57ac9c5346, type: 2}
 --- !u!1001 &1350962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66117,7 +66117,7 @@ MonoBehaviour:
   - {fileID: 1415973878}
   - {fileID: 490580137}
   - {fileID: 966932004}
-  homePoint: {fileID: 688570347}
+  homePoint: {fileID: 0}
   teleportOne: {fileID: 622503289}
   teleportTwo: {fileID: 816246631}
   pointIndex: 0
@@ -70641,7 +70641,7 @@ MonoBehaviour:
   - {fileID: 357063602}
   - {fileID: 572616849}
   - {fileID: 1193332664}
-  homePoint: {fileID: 1890265197}
+  homePoint: {fileID: 0}
   teleportOne: {fileID: 622503289}
   teleportTwo: {fileID: 816246631}
   pointIndex: 0
@@ -76173,6 +76173,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 837553992430622330, guid: 1ba6abd67932c4249a01bbd860017af7, type: 3}
   m_PrefabInstance: {fileID: 1699506783}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1705673851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705673852}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705673852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705673851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.44507396, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1707307485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80531,7 +80561,7 @@ MonoBehaviour:
   - {fileID: 220561115}
   - {fileID: 679643305}
   - {fileID: 469985700}
-  homePoint: {fileID: 115326456}
+  homePoint: {fileID: 0}
   teleportOne: {fileID: 622503289}
   teleportTwo: {fileID: 816246631}
   pointIndex: 0
@@ -91595,7 +91625,7 @@ MonoBehaviour:
   - {fileID: 1104541938}
   - {fileID: 144436827}
   - {fileID: 1613168792}
-  homePoint: {fileID: 1685291962}
+  homePoint: {fileID: 0}
   teleportOne: {fileID: 622503289}
   teleportTwo: {fileID: 816246631}
   pointIndex: 0
