@@ -8,12 +8,14 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    
+
     public Text scoreText;
     public Text highscoreText;
 
     private int score = 0;
     private int highscore = 0;
+
+    private int coinEaten = 0; 
 
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         highscore = PlayerPrefs.GetInt("highscore", 0);
-        scoreText.text = score.ToString() + " POINTS";
+        scoreText.text = score.ToString() + "POINTS";
         highscoreText.text = "HIGHSCORE: " + highscore.ToString();
     }
     
@@ -32,6 +34,7 @@ public class ScoreManager : MonoBehaviour
     public void AddPoint()
     {
         score += 1;
+        coinEaten++;
         scoreText.text = score.ToString() + " POINTS";
         if (highscore < score)
             PlayerPrefs.SetInt("highscore", score);
@@ -45,10 +48,17 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("highscore", score);
     }
 
-    public int getScore()
+    public void AddGhostPoint()
     {
-        return score;
+        score += 200;
+        scoreText.text = score.ToString() + " POINTS";
+        if (highscore < score)
+            PlayerPrefs.SetInt("highscore", score);
     }
 
-    
+    public int GetCoinsEaten() {
+        return coinEaten;
+    }
+
+
 }
